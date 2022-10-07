@@ -4,7 +4,7 @@ import {GenderDisplayNames, MotorTypeDisplayNames, UserInfo} from '../shared/mod
 import {Regexp} from '../shared/constants/regexp.consts';
 import {MatFormFieldAppearance} from '@angular/material/form-field';
 import {Color} from '@angular-material-components/color-picker';
-import {FormBuilder, FormGroup, NgForm, Validators} from '@angular/forms';
+import {UntypedFormBuilder, UntypedFormGroup, NgForm, Validators} from '@angular/forms';
 import {ChipsComponent} from '../shared/components/chips/chips.component';
 import {ColorFieldComponent} from '../shared/components/color-field/color-field.component';
 import {DataInfoService} from '../shared/services/data-info.service';
@@ -32,14 +32,14 @@ export class LandingComponent implements OnInit {
   regexEmail = Regexp.EMAIL;
   appearance: MatFormFieldAppearance = 'standard';
 
-  firstFormGroup: FormGroup;
-  secondFormGroup: FormGroup;
+  firstFormGroup: UntypedFormGroup;
+  secondFormGroup: UntypedFormGroup;
   isFormSubmitted = false;
   isFormActivated = false;
   isInfoSent = false;
 
   constructor(private breakpointObserver: BreakpointObserver,
-              private formBuilder: FormBuilder,
+              private formBuilder: UntypedFormBuilder,
               private dataInfoService: DataInfoService) {
   }
 
