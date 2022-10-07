@@ -1,0 +1,6 @@
+<mat-nav-list class="nav-list">
+  <a *ngFor="let link of items" mat-list-item [routerLink]="link.path" routerLinkActive="active-link">
+    <mat-icon *ngIf="link.icon" class="material-icons-outlined" matListIcon>{{link.icon}}</mat-icon>
+    <span class="item-title">{{ link.title }}</span>
+  </a>
+</mat-nav-list>

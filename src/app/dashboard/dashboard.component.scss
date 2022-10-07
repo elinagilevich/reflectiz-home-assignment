@@ -1,0 +1,31 @@
+.header {
+  justify-content: space-between;
+  position: relative;
+  z-index: 2;
+
+  .left, .right {
+    display: flex;
+  }
+
+  .title {
+    text-transform: uppercase;
+    font-family: "Teko", sans-serif;
+    font-size: 30px;
+    padding: 7px 1vw 0;
+  }
+}
+
+.sidenav-container {
+  height: calc(100vh - 64px);
+}
+
+.mat-sidenav {
+  background: #F2F2F2;
+  width: 200px;
+  min-width: fit-content;
+}
+
+.mat-sidenav-content {
+  padding: 4vh 2vw;
+}
+

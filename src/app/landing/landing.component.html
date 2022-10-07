@@ -1,0 +1,139 @@
+<div class="content">
+  <mat-toolbar class="header mat-elevation-z5">
+
+    <h2 class="title">Reflectiz <span class="accent">Cars</span></h2>
+  </mat-toolbar>
+
+  <form #form="ngForm" (ngSubmit)="sendInfo()">
+    <mat-grid-list cols="3" rowHeight="fit">
+      <mat-grid-tile [colspan]="layoutCols" class="form-wrapper">
+        <mat-card class="form-card mat-elevation-z0">
+          <div class="inner-section">
+            <div *ngIf="!isFormActivated">
+              <h3 class="form-title">Car of your dream is right there!</h3>
+              <p class="sub-line">We really know how to match a perfect car to the perfect owner. Take our one-minute questionnaire and get best offer from the dealer.</p>
+
+              <div class="button-wrapper">
+                <button class="form-btn invite-btn" (click)="isFormActivated = true" mat-raised-button color="accent">I'm ready!</button>
+              </div>
+            </div>
+            <div *ngIf="isFormActivated && !isInfoSent" class="form-controls-wrapper">
+
+              <p class="first-line">Please fill in the form</p>
+
+              <div class="control-field full">
+                <mat-form-field [appearance]="appearance" data-test-id="fullName">
+                  <mat-label>Full name</mat-label>
+                  <input [(ngModel)]="userInfo.fullName" name="fullName" matInput placeholder="Enter full name"
+                         aria-label="custom domain" required>
+                </mat-form-field>
+              </div>
+
+              <div class="control-field">
+                <mat-form-field [appearance]="appearance" data-test-id="gender">
+                  <mat-label>Gender</mat-label>
+                  <mat-select placeholder="Select gender"
+                              [(ngModel)]="userInfo.gender"
+                              name="gender" required>
+                    <mat-option *ngFor="let option of genderOptions | keyvalue" value="{{option.key}}">
+                      {{option.value}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+
+              <div class="control-field">
+
+                <mat-form-field [appearance]="appearance" data-test-id="birthDate" class="birth-date-field">
+                  <mat-label>Birth date</mat-label>
+                  <input [(ngModel)]="userInfo.birthDate" placeholder="Choose a date" name="birthDate" aria-label="birth date" matInput
+                         [matDatepicker]="picker" required>
+                  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                  <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
+              </div>
+
+              <div class="control-field full">
+                <mat-form-field [appearance]="appearance" data-test-id="email">
+                  <mat-label>Email</mat-label>
+                  <input [(ngModel)]="userInfo.email" name="email" matInput placeholder="Enter email"
+                         aria-label="email" required #email="ngModel" [pattern]="regexEmail">
+                  <mat-error *ngIf="email.errors?.pattern">Enter a valid email address</mat-error>
+                </mat-form-field>
+              </div>
+
+              <div class="control-field full">
+                <mat-form-field [appearance]="appearance" data-test-id="address">
+                  <mat-label>Address</mat-label>
+                  <input [(ngModel)]="userInfo.location.address" name="address" matInput placeholder="Your address"
+                         aria-label="address" required>
+                </mat-form-field>
+              </div>
+
+              <div class="control-field">
+                <mat-form-field [appearance]="appearance" data-test-id="country">
+                  <mat-label>Country</mat-label>
+                  <input [(ngModel)]="userInfo.location.country" name="country" matInput placeholder="Your country"
+                         aria-label="country" required>
+                </mat-form-field>
+              </div>
+
+              <div class="control-field">
+                <mat-form-field [appearance]="appearance" data-test-id="city">
+                  <mat-label>City</mat-label>
+                  <input [(ngModel)]="userInfo.location.city" name="city" matInput placeholder="Your city"
+                         aria-label="city" required>
+                </mat-form-field>
+              </div>
+
+              <div class="control-field full">
+                <app-chips #chips [elements]="userInfo.hobbies" [placeholder]="'Add hobby...'" [label]="'Your hobbies'"></app-chips>
+              </div>
+
+              <div class="control-field">
+                <app-color-field #color [color]="userInfo.favouriteColor" (colorChanged)="onColorChange($event)"></app-color-field>
+              </div>
+
+              <div class="control-field">
+                <mat-form-field [appearance]="appearance" data-test-id="seats">
+                  <mat-label>Amount of seats</mat-label>
+                  <input type="number" min="0" [(ngModel)]="userInfo.seatsAmount" name="seats" matInput placeholder="Required amount of seats"
+                         aria-label="seats" required>
+                </mat-form-field>
+              </div>
+
+              <div class="control-field">
+                <mat-form-field [appearance]="appearance" data-test-id="motor">
+                  <mat-label>Motor Type</mat-label>
+                  <mat-select placeholder="Select motor type"
+                              [(ngModel)]="userInfo.motorType"
+                              name="motorType" required>
+                    <mat-option *ngFor="let option of motorOptions | keyvalue" value="{{option.key}}">
+                      {{option.value}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+
+              <mat-error class="submit-error" *ngIf="!isFormValid && isFormSubmitted">Please ensure that provided data is valid and all required inputs are filled in.</mat-error>
+              <div class="button-wrapper">
+                <button class="form-btn" mat-raised-button color="primary">Send</button>
+              </div>
+
+            </div>
+
+            <div *ngIf="isInfoSent">
+              <h3 class="form-title final">Dear {{userInfo.fullName}}, your perfect match is on its way!</h3>
+              <p class="sub-line">Your request just was sent and a mail with the results will be sent to {{userInfo.email}} in a couple of minutes. We really appreciate your time!</p>
+            </div>
+          </div>
+        </mat-card>
+      </mat-grid-tile>
+    </mat-grid-list>
+
+  </form>
+
+  <div class="footer">
+    <span>Powered by Reflectiz Cars ©2022.</span>
+  </div>
+</div>

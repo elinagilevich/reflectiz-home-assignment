@@ -1,0 +1,16 @@
+<mat-form-field class="chip-list" [ngClass]="{'mat-form-field-invalid': isControlInvalid()}" [attr.data-test-id]="label">
+  <mat-label>{{label}}</mat-label>
+  <mat-chip-list #chipList aria-label="Fruit selection" required>
+    <mat-chip *ngFor="let element of elements" [selectable]="selectable"
+              [removable]="removable" (removed)="remove(element)">
+      {{element}}
+      <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+    </mat-chip>
+    <input [ngModel]="elements" #chipInput="ngModel" [placeholder]="placeholder"
+           [matChipInputFor]="chipList"
+           [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+           [matChipInputAddOnBlur]="addOnBlur"
+           (matChipInputTokenEnd)="add($event)" aria-label="chip-list"
+           (blur)="onBlur()">
+  </mat-chip-list>
+</mat-form-field>

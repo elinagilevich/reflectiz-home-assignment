@@ -1,0 +1,28 @@
+<mat-toolbar class="header mat-elevation-z5" color="primary">
+  <div class="left">
+    <button
+      type="button"
+      aria-label="Toggle sidenav"
+      mat-icon-button
+      (click)="drawer.toggle()"
+      *ngIf="isMediumOrSmaller | async">
+      <mat-icon class="burger-icon" aria-label="Side nav toggle icon">menu</mat-icon>
+    </button>
+    <h2 class="title">Reflectiz <span class="accent">Cars</span></h2>
+  </div>
+  <div class="right">
+  </div>
+
+</mat-toolbar>
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #drawer [attr.role]="(isMediumOrSmaller | async) ? 'dialog' : 'navigation'"
+               [mode]="(isMediumOrSmaller | async) ? 'over' : 'side'"
+               [opened]="(isMediumOrSmaller | async) === false" [disableClose]="(isMediumOrSmaller | async) === false">
+
+
+    <app-navigation [items]="links"></app-navigation>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>

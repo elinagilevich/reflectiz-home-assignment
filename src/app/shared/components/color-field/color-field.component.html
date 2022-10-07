@@ -1,0 +1,7 @@
+<mat-form-field class="color-param" data-test-id="color">
+  <mat-label>Favourite color</mat-label>
+  <input matInput [ngxMatColorPicker]="colorPicker" [(ngModel)]="color" #colorInput="ngModel" name="color" aria-label="color"
+         (colorChange)="colorChangeEmit($event.value)" required>
+  <ngx-mat-color-toggle #toggle matSuffix [for]="colorPicker"></ngx-mat-color-toggle>
+  <ngx-mat-color-picker #colorPicker [touchUi]="false" color="primary"></ngx-mat-color-picker>
+</mat-form-field>
