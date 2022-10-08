@@ -51,7 +51,6 @@ export class LandingComponent implements OnInit {
     this.breakpointObserver.observe([Breakpoints.XSmall, Breakpoints.Small])
       .subscribe(
         ({matches}) => {
-          console.log(matches);
           this.layoutCols = matches ? mobileGridCols : defaultGridCols;
         }
       );
@@ -76,7 +75,6 @@ export class LandingComponent implements OnInit {
   }
 
   onColorChange(color: Color): void {
-    console.log(color);
     this.userInfo.favouriteColor = color;
   }
 

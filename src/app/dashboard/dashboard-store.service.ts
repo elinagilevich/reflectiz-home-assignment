@@ -40,7 +40,6 @@ export class DashboardStoreService {
       const initialColorVal = this.colorsByAgesGroupsMap[ageRange][user.favouriteColor] || 0;
       this.colorsByAgesGroupsMap[ageRange][user.favouriteColor] = initialColorVal + 1;
     });
-    console.log(this.colorsByAgesGroupsMap);
   }
 
   private getAgeRange(age: number): string {
@@ -57,7 +56,6 @@ export class DashboardStoreService {
         this.hobbiesMap[hobby] = initialHobbyVal + 1;
       });
     });
-    console.log(this.hobbiesMap);
   }
 
   private fillEngineByGenderMap(): void {
@@ -70,7 +68,6 @@ export class DashboardStoreService {
         this.engineByGenderMap[user.gender][user.motorType] = initialVal + 1;
       }
     });
-    console.log(this.engineByGenderMap);
   }
 
   private fillVisitorsMap(): void {
@@ -80,6 +77,5 @@ export class DashboardStoreService {
       filled: filledInUsers,
       'not filled': allUsers - filledInUsers
     };
-    console.log(this.visitorsMap);
   }
 }

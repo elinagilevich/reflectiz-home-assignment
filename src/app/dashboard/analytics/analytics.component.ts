@@ -43,10 +43,6 @@ export class AnalyticsComponent implements OnInit {
     this.fillChart2Data();
     this.fillChart3Data();
     this.fillChart4Data();
-    console.log(this.chartData1);
-    console.log(this.chartData2);
-    console.log(this.chartData3);
-    console.log(this.chartData4);
   }
 
   private fillChart3Data(): void {
