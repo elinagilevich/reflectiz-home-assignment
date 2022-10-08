@@ -43,7 +43,10 @@ export class ChipsComponent implements OnInit, AfterViewChecked {
 
     // Add hobby
     if ((value || '').trim()) {
-      this.elements.push(value.trim().toLowerCase());
+      const valToAdd = value.trim().toLowerCase();
+      if (this.elements.findIndex(el => el === valToAdd) === -1) {
+        this.elements.push(valToAdd);
+      }
     }
 
     // Reset the input value
