@@ -39,7 +39,7 @@ export class LandingComponent implements OnInit {
   isFormActivated = false;
   isInfoSent = false;
   maxlength = 50;
-  specialCharsError = 'Following characters are forbidden: !&~#$^*()+=\"[]{}|?`/\\:<>%;\'';
+  specialCharsError = 'Following characters are forbidden: !&~#$^*()+=\"[]{}|?`\\:<>%;\'';
 
   constructor(private breakpointObserver: BreakpointObserver,
               private formBuilder: UntypedFormBuilder,
