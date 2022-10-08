@@ -1,7 +1,14 @@
 
-table.mat-table {
-  width: 100%;
+.table-container {
+  width: 100%; // <!-- THIS WORKS for horizontal scrolling (all columns visible)
 }
+
+.mat-table {
+  display: block;
+  width: 100%;
+  overflow-x: auto;
+}
+
 
 .mat-cell, .mat-footer-cell, .mat-header-cell {
   font-size: 12px;

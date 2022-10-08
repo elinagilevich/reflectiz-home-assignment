@@ -7,8 +7,15 @@ import {CommonModule} from '@angular/common';
 import {NgModule} from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {ColorFieldComponent} from './components/color-field/color-field.component';
-import {PieChartComponent} from './components/pie-chart/pie-chart.component';
 import {NavigationComponent} from './components/navigation/navigation.component';
+import {NgxChartsModule} from '@swimlane/ngx-charts';
+import { GroupedVerticalBarChartComponent } from './components/charts/grouped-vertical-bar-chart/grouped-vertical-bar-chart.component';
+import { ColorMapChartComponent } from './components/charts/color-map-chart/color-map-chart.component';
+import { HorizontalBarChartComponent } from './components/charts/horizontal-bar-chart/horizontal-bar-chart.component';
+import { PieChartComponent } from './components/charts/pie-chart/pie-chart.component';
+import { NoDataForDisplayComponent } from './components/charts/no-data-for-display/no-data-for-display.component';
+import {DateValidatorDirective} from './validators/date-validator.directive';
+import {NoSpecialCharactersDirective} from './validators/no-special-characters.directive';
 
 
 @NgModule({
@@ -16,7 +23,13 @@ import {NavigationComponent} from './components/navigation/navigation.component'
     ChipsComponent,
     ColorFieldComponent,
     NavigationComponent,
-    PieChartComponent
+    GroupedVerticalBarChartComponent,
+    ColorMapChartComponent,
+    HorizontalBarChartComponent,
+    PieChartComponent,
+    NoDataForDisplayComponent,
+    DateValidatorDirective,
+    NoSpecialCharactersDirective
   ],
   imports: [
     CommonModule,
@@ -25,7 +38,8 @@ import {NavigationComponent} from './components/navigation/navigation.component'
     ReactiveFormsModule,
     LayoutModule,
     NgxMatColorPickerModule,
-    RouterModule
+    RouterModule,
+    NgxChartsModule
   ],
   exports: [
     ChipsComponent,
@@ -36,6 +50,14 @@ import {NavigationComponent} from './components/navigation/navigation.component'
     NgxMatColorPickerModule,
     ColorFieldComponent,
     NavigationComponent,
+    NgxChartsModule,
+    GroupedVerticalBarChartComponent,
+    ColorMapChartComponent,
+    HorizontalBarChartComponent,
+    PieChartComponent,
+    NoDataForDisplayComponent,
+    DateValidatorDirective,
+    NoSpecialCharactersDirective
   ],
   providers: [
     { provide: MAT_COLOR_FORMATS, useValue: NGX_MAT_COLOR_FORMATS }

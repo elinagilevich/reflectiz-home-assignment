@@ -1,66 +1,69 @@
-<table mat-table [dataSource]="dataSource">
-  <ng-container matColumnDef="fullName">
-    <th mat-header-cell *matHeaderCellDef>Full Name</th>
-    <td mat-cell *matCellDef="let userInfo">
-      <span>{{userInfo.fullName}}</span>
-    </td>
-  </ng-container>
-  <ng-container matColumnDef="gender">
-    <th mat-header-cell *matHeaderCellDef>Gender</th>
-    <td mat-cell *matCellDef="let userInfo">
-      <span>{{genderDisplayNames[userInfo.gender]}}</span>
-    </td>
-  </ng-container>
-  <ng-container matColumnDef="email">
-    <th mat-header-cell *matHeaderCellDef>Email</th>
-    <td mat-cell *matCellDef="let userInfo">
-      <span>{{userInfo.email}}</span>
-    </td>
-  </ng-container>
-  <ng-container matColumnDef="birthDate">
-    <th mat-header-cell *matHeaderCellDef>Birth Date</th>
-    <td mat-cell *matCellDef="let userInfo">
-      <span [matTooltip]="getAge(userInfo.birthDate)">{{getBirthDate(userInfo.birthDate)}}</span>
-    </td>
-  </ng-container>
-  <ng-container matColumnDef="address">
-    <th mat-header-cell *matHeaderCellDef>Address</th>
-    <td mat-cell *matCellDef="let userInfo">
-      <span>{{userInfo.location.country}}, {{userInfo.location.city}}, {{userInfo.location.address}}</span>
-    </td>
-  </ng-container>
-  <ng-container matColumnDef="hobbies">
-    <th mat-header-cell *matHeaderCellDef>Hobbies</th>
-    <td mat-cell *matCellDef="let userInfo">
+<div class="table-container">
+  <table mat-table [dataSource]="dataSource">
+    <ng-container matColumnDef="fullName" sticky>
+      <th mat-header-cell *matHeaderCellDef>Full Name</th>
+      <td mat-cell *matCellDef="let userInfo">
+        <span>{{userInfo.fullName}}</span>
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="gender">
+      <th mat-header-cell *matHeaderCellDef>Gender</th>
+      <td mat-cell *matCellDef="let userInfo">
+        <span>{{genderDisplayNames[userInfo.gender]}}</span>
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="email">
+      <th mat-header-cell *matHeaderCellDef>Email</th>
+      <td mat-cell *matCellDef="let userInfo">
+        <span>{{userInfo.email}}</span>
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="birthDate">
+      <th mat-header-cell *matHeaderCellDef>Birth Date</th>
+      <td mat-cell *matCellDef="let userInfo">
+        <span [matTooltip]="getAge(userInfo.birthDate)">{{getBirthDate(userInfo.birthDate)}}</span>
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="address">
+      <th mat-header-cell *matHeaderCellDef>Address</th>
+      <td mat-cell *matCellDef="let userInfo">
+        <span>{{userInfo.location.country}}, {{userInfo.location.city}}, {{userInfo.location.address}}</span>
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="hobbies">
+      <th mat-header-cell *matHeaderCellDef>Hobbies</th>
+      <td mat-cell *matCellDef="let userInfo">
                 <span *ngFor="let hobby of userInfo.hobbies; let last = last">
                   {{hobby}}<span *ngIf="!last">, </span>
                 </span>
-    </td>
-  </ng-container>
-  <ng-container matColumnDef="favouriteColor">
-    <th mat-header-cell *matHeaderCellDef>Color</th>
-    <td mat-cell *matCellDef="let userInfo">
-      <div class="color-circle mat-elevation-z2"
-           [ngStyle]="{'background-color' : userInfo.favouriteColor}"
-           [matTooltip]="userInfo.favouriteColor"
-           matTooltipPosition="below"
-      ></div>
-    </td>
-  </ng-container>
-  <ng-container matColumnDef="seatsAmount">
-    <th mat-header-cell *matHeaderCellDef>Seats</th>
-    <td mat-cell *matCellDef="let userInfo">
-      <span>{{userInfo.seatsAmount}}</span>
-    </td>
-  </ng-container>
-  <ng-container matColumnDef="motorType">
-    <th mat-header-cell *matHeaderCellDef>Motor</th>
-    <td mat-cell *matCellDef="let userInfo">
-      <span>{{motorDisplayNames[userInfo.motorType]}}</span>
-    </td>
-  </ng-container>
-  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-</table>
-<mat-paginator [pageSizeOptions]="[10, 25, 50]">
-</mat-paginator>
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="favouriteColor">
+      <th mat-header-cell *matHeaderCellDef>Color</th>
+      <td mat-cell *matCellDef="let userInfo">
+        <div class="color-circle mat-elevation-z2"
+             [ngStyle]="{'background-color' : userInfo.favouriteColor}"
+             [matTooltip]="userInfo.favouriteColor"
+             matTooltipPosition="below"
+        ></div>
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="seatsAmount">
+      <th mat-header-cell *matHeaderCellDef>Seats</th>
+      <td mat-cell *matCellDef="let userInfo">
+        <span>{{userInfo.seatsAmount}}</span>
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="motorType">
+      <th mat-header-cell *matHeaderCellDef>Motor</th>
+      <td mat-cell *matCellDef="let userInfo">
+        <span>{{motorDisplayNames[userInfo.motorType]}}</span>
+      </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
+  <mat-paginator [pageSizeOptions]="[10, 25, 50]">
+  </mat-paginator>
+</div>
+

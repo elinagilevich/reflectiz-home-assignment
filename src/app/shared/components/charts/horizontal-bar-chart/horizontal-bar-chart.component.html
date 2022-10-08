@@ -1,0 +1,25 @@
+<ngx-charts-bar-horizontal-stacked *ngIf="!!data.length; else noDataToDisplay"
+  [view]="view"
+  [scheme]="colorScheme"
+  [results]="data"
+  [gradient]="gradient"
+  [xAxis]="showXAxis"
+  [yAxis]="showYAxis"
+  [legend]="showLegend"
+  [legendPosition]="legendPosition"
+  [legendTitle]="legendTitle"
+  [showXAxisLabel]="showXAxisLabel"
+  [showYAxisLabel]="showYAxisLabel"
+  [xAxisTickFormatting]="format"
+  [xAxisLabel]="xAxisLabel"
+  [yAxisLabel]="yAxisLabel"
+>
+  <ng-template #tooltipTemplate let-model="model">
+    <div class="tooltip-wrapper">
+      {{ model.name }} - {{ model.value }} visitors
+    </div>
+  </ng-template>
+</ngx-charts-bar-horizontal-stacked>
+<ng-template #noDataToDisplay>
+  <app-no-data-for-display></app-no-data-for-display>
+</ng-template>

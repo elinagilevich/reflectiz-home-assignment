@@ -13,8 +13,9 @@ export class ChipsComponent implements OnInit, AfterViewChecked {
   @Input() elements: string[] = [];
   @Input() label: string;
   @Input() placeholder: string;
+  @Input() maxElements: number;
   visible = true;
-  selectable = true;
+  selectable = false;
   removable = true;
   addOnBlur = true;
 
@@ -66,5 +67,13 @@ export class ChipsComponent implements OnInit, AfterViewChecked {
 
   isControlInvalid(): boolean {
     return this.chipInput?.control?.invalid && this.chipInput?.control?.touched;
+  }
+
+  isPossibleToAddMore(): boolean {
+    return !this.maxElements || this.elements.length < this.maxElements;
+  }
+
+  resolvePlaceholder(): string {
+    return this.isPossibleToAddMore() ? this.placeholder : '';
   }
 }

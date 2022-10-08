@@ -6,11 +6,13 @@
       {{element}}
       <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
     </mat-chip>
-    <input [ngModel]="elements" #chipInput="ngModel" [placeholder]="placeholder"
+    <input [ngModel]="elements" #chipInput="ngModel" [placeholder]="resolvePlaceholder()"
            [matChipInputFor]="chipList"
            [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
            [matChipInputAddOnBlur]="addOnBlur"
            (matChipInputTokenEnd)="add($event)" aria-label="chip-list"
-           (blur)="onBlur()">
+           (blur)="onBlur()" [disabled]="!isPossibleToAddMore()"
+            maxlength="30">
   </mat-chip-list>
+  <mat-hint *ngIf="maxElements">Possible to enter till {{maxElements}} elements</mat-hint>
 </mat-form-field>

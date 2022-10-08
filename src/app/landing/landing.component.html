@@ -2,6 +2,7 @@
   <mat-toolbar class="header mat-elevation-z5">
 
     <h2 class="title">Reflectiz <span class="accent">Cars</span></h2>
+    <a class="dashboard-button" mat-stroked-button routerLink="dashboard">Dashboard</a>
   </mat-toolbar>
 
   <form #form="ngForm" (ngSubmit)="sendInfo()">
@@ -25,7 +26,8 @@
                 <mat-form-field [appearance]="appearance" data-test-id="fullName">
                   <mat-label>Full name</mat-label>
                   <input [(ngModel)]="userInfo.fullName" name="fullName" matInput placeholder="Enter full name"
-                         aria-label="custom domain" required>
+                         aria-label="custom domain" required [maxLength]="maxlength" #fullName="ngModel" appNoSpecialCharacters>
+                  <mat-error *ngIf="fullName?.errors?.specialCharsForbidden">{{specialCharsError}}</mat-error>
                 </mat-form-field>
               </div>
 
@@ -46,10 +48,11 @@
 
                 <mat-form-field [appearance]="appearance" data-test-id="birthDate" class="birth-date-field">
                   <mat-label>Birth date</mat-label>
-                  <input [(ngModel)]="userInfo.birthDate" placeholder="Choose a date" name="birthDate" aria-label="birth date" matInput
-                         [matDatepicker]="picker" required>
+                  <input #birthDate="ngModel" [(ngModel)]="userInfo.birthDate" placeholder="Choose a date" name="birthDate" aria-label="birth date" matInput
+                         [matDatepicker]="picker" required appDateValidator>
                   <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                   <mat-datepicker #picker></mat-datepicker>
+                  <mat-error *ngIf="birthDate?.errors?.dateInFuture">Date is in the future</mat-error>
                 </mat-form-field>
               </div>
 
@@ -57,7 +60,8 @@
                 <mat-form-field [appearance]="appearance" data-test-id="email">
                   <mat-label>Email</mat-label>
                   <input [(ngModel)]="userInfo.email" name="email" matInput placeholder="Enter email"
-                         aria-label="email" required #email="ngModel" [pattern]="regexEmail">
+                         aria-label="email" required #email="ngModel" [pattern]="regexEmail" [maxLength]="maxlength" appNoSpecialCharacters>
+                  <mat-error *ngIf="email?.errors?.specialCharsForbidden">{{specialCharsError}}</mat-error>
                   <mat-error *ngIf="email.errors?.pattern">Enter a valid email address</mat-error>
                 </mat-form-field>
               </div>
@@ -66,7 +70,8 @@
                 <mat-form-field [appearance]="appearance" data-test-id="address">
                   <mat-label>Address</mat-label>
                   <input [(ngModel)]="userInfo.location.address" name="address" matInput placeholder="Your address"
-                         aria-label="address" required>
+                         aria-label="address" required [maxLength]="100" appNoSpecialCharacters #address="ngModel">
+                  <mat-error *ngIf="address?.errors?.specialCharsForbidden">{{specialCharsError}}</mat-error>
                 </mat-form-field>
               </div>
 
@@ -74,7 +79,8 @@
                 <mat-form-field [appearance]="appearance" data-test-id="country">
                   <mat-label>Country</mat-label>
                   <input [(ngModel)]="userInfo.location.country" name="country" matInput placeholder="Your country"
-                         aria-label="country" required>
+                         aria-label="country" required [maxLength]="maxlength" appNoSpecialCharacters #country="ngModel">
+                  <mat-error *ngIf="country?.errors?.specialCharsForbidden">{{specialCharsError}}</mat-error>
                 </mat-form-field>
               </div>
 
@@ -82,12 +88,13 @@
                 <mat-form-field [appearance]="appearance" data-test-id="city">
                   <mat-label>City</mat-label>
                   <input [(ngModel)]="userInfo.location.city" name="city" matInput placeholder="Your city"
-                         aria-label="city" required>
+                         aria-label="city" required [maxLength]="maxlength" appNoSpecialCharacters #city="ngModel">
+                  <mat-error *ngIf="city?.errors?.specialCharsForbidden">{{specialCharsError}}</mat-error>
                 </mat-form-field>
               </div>
 
               <div class="control-field full">
-                <app-chips #chips [elements]="userInfo.hobbies" [placeholder]="'Add hobby...'" [label]="'Your hobbies'"></app-chips>
+                <app-chips #chips [elements]="userInfo.hobbies" [placeholder]="'Add hobby...'" [label]="'Your hobbies'" [maxElements]="5"></app-chips>
               </div>
 
               <div class="control-field">
@@ -97,7 +104,7 @@
               <div class="control-field">
                 <mat-form-field [appearance]="appearance" data-test-id="seats">
                   <mat-label>Amount of seats</mat-label>
-                  <input type="number" min="0" [(ngModel)]="userInfo.seatsAmount" name="seats" matInput placeholder="Required amount of seats"
+                  <input type="number" min="0" [max]="maxlength" [(ngModel)]="userInfo.seatsAmount" name="seats" matInput placeholder="Required amount of seats"
                          aria-label="seats" required>
                 </mat-form-field>
               </div>

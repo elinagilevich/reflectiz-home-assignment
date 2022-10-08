@@ -9,6 +9,7 @@ import {ChipsComponent} from '../shared/components/chips/chips.component';
 import {ColorFieldComponent} from '../shared/components/color-field/color-field.component';
 import {DataInfoService} from '../shared/services/data-info.service';
 
+
 const defaultGridCols = 2;
 const mobileGridCols = 3;
 
@@ -37,6 +38,8 @@ export class LandingComponent implements OnInit {
   isFormSubmitted = false;
   isFormActivated = false;
   isInfoSent = false;
+  maxlength = 50;
+  specialCharsError = 'Following characters are forbidden: !&~#$^*()+=\"[]{}|?`/\\:<>%;\'';
 
   constructor(private breakpointObserver: BreakpointObserver,
               private formBuilder: UntypedFormBuilder,

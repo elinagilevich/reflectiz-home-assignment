@@ -13,7 +13,7 @@ import {DashboardStoreService} from './dashboard-store.service';
 })
 export class DashboardComponent implements OnInit {
 
-  isMediumOrSmaller: Observable<boolean> = this.breakpointObserver.observe([Breakpoints.XSmall, Breakpoints.Small])
+  isMediumOrSmaller: Observable<boolean> = this.breakpointObserver.observe([Breakpoints.XSmall, Breakpoints.Small, Breakpoints.Medium])
     .pipe(
       map(result => result.matches),
       shareReplay()

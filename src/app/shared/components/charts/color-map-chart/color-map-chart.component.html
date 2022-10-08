@@ -1,0 +1,10 @@
+<ngx-charts-tree-map *ngIf="!!data.length; else noDataToDisplay"
+  [view]="view"
+  [customColors]="customColors"
+  [results]="data"
+  [gradient]="gradient"
+  [animations]="animations">
+</ngx-charts-tree-map>
+<ng-template #noDataToDisplay>
+  <app-no-data-for-display></app-no-data-for-display>
+</ng-template>

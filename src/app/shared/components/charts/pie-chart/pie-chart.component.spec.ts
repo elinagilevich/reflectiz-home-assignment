@@ -11,9 +11,7 @@ describe('PieChartComponent', () => {
       declarations: [ PieChartComponent ]
     })
     .compileComponents();
-  });
 
-  beforeEach(() => {
     fixture = TestBed.createComponent(PieChartComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

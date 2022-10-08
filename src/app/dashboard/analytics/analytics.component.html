@@ -1,46 +1,74 @@
 <div class="analytic-container">
-  <mat-grid-list [cols]="12" rowHeight="250px" gutterSize="25px">
-    <mat-grid-tile [colspan]="cardLayoutCols" [rowspan]="1">
-      <mat-card>
-        <mat-card-header>
-          <mat-card-title>
-            Most picked engine type by gender
-          </mat-card-title>
-        </mat-card-header>
-        <mat-card-content class="card-content">
-          Content
-        </mat-card-content>
-      </mat-card>
 
-    </mat-grid-tile>
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>
+        Most picked engine type by gender
+      </mat-card-title>
+    </mat-card-header>
+    <mat-card-content class="card-content">
+      <div class="inner-content">
 
-    <mat-grid-tile [colspan]="cardLayoutCols" [rowspan]="1">
-      <mat-card>
-        <mat-card-header>
-          <mat-card-title>
-            Most picked colors by age
-          </mat-card-title>
-        </mat-card-header>
-        <mat-card-content class="card-content">
-          Content
-        </mat-card-content>
-      </mat-card>
+        <app-grouped-vertical-bar-chart [data]="chartData1"
+                                        [legendTitle]="legendTitle1" [xAxisLabel]="xAxisLabel1"
+                                        [yAxisLabel]="yAxisLabel1">
+        </app-grouped-vertical-bar-chart>
+      </div>
+    </mat-card-content>
+  </mat-card>
 
-    </mat-grid-tile>
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>
+        Ratio of users who filled out the form
+      </mat-card-title>
+    </mat-card-header>
+    <mat-card-content class="card-content">
+      <div class="inner-content">
+        <app-pie-chart [data]="chartData4" [legendTitle]="legendTitle4"></app-pie-chart>
+      </div>
+    </mat-card-content>
+  </mat-card>
 
-    <mat-grid-tile [colspan]="cardLayoutCols" [rowspan]="1">
-      <mat-card>
-        <mat-card-header>
-          <mat-card-title>
-            Most popular hobbies among visitors
-          </mat-card-title>
-        </mat-card-header>
-        <mat-card-content class="card-content">
-          Content
-        </mat-card-content>
-      </mat-card>
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>
+        Most popular hobbies among visitors
+      </mat-card-title>
+    </mat-card-header>
+    <mat-card-content class="card-content">
+      <div class="inner-content">
 
-    </mat-grid-tile>
-  </mat-grid-list>
+        <app-horizontal-bar-chart [data]="chartData3"
+                                  [legendTitle]="legendTitle3" [xAxisLabel]="xAxisLabel3"
+                                  [yAxisLabel]="yAxisLabel3">
+        </app-horizontal-bar-chart>
+      </div>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>
+        Most picked colors by age group
+      </mat-card-title>
+    </mat-card-header>
+    <mat-card-content class="card-content">
+      <div class="inner-content">
+        <mat-form-field appearance="standard" data-test-id="age-range" class="select-range-control">
+          <mat-label>Age range</mat-label>
+          <mat-select placeholder="Select age range"
+                      [ngModel]="ageRangeSub | async" (selectionChange)="onAgeRangeChange($event)"
+                      name="ageRange">
+            <mat-option *ngFor="let option of ageRanges" value="{{option}}">
+              {{option}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <app-color-map-chart [data]="chartData2"></app-color-map-chart>
+      </div>
+    </mat-card-content>
+  </mat-card>
+
 
 </div>

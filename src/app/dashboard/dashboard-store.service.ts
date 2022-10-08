@@ -1,9 +1,11 @@
 import {Injectable} from '@angular/core';
 import {DataInfoService} from '../shared/services/data-info.service';
-import {UserInfo} from '../shared/models/user-info.model';
+import {Gender, UserInfo} from '../shared/models/user-info.model';
 import * as dayjs from 'dayjs';
 
-const ageGroups = ['70-80', '60-70', '50-60', '40-50', '30-40', '20-30', '10-20', '0-10'];
+
+export const ageGroups = ['70-80', '60-70', '50-60', '40-50', '30-40', '20-30', '10-20', '0-10'];
+const genderGroups = [Gender.Male, Gender.Female];
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +15,8 @@ export class DashboardStoreService {
   userInfo: UserInfo[] = [];
   colorsByAgesGroupsMap = {};
   hobbiesMap = {};
+  engineByGenderMap = {};
+  visitorsMap = {};
   constructor(private dataInfoService: DataInfoService) { }
 
   initService(): void {
@@ -20,12 +24,14 @@ export class DashboardStoreService {
       this.userInfo = this.dataInfoService.getUserInfo();
       this.fillColorsByAgesGroupsMap();
       this.fillHobbiesMap();
+      this.fillEngineByGenderMap();
+      this.fillVisitorsMap();
     }
   }
 
   private fillColorsByAgesGroupsMap(): void {
-    ageGroups.forEach(group => {
-      this.colorsByAgesGroupsMap[group] = {};
+    ageGroups.forEach(g => {
+      this.colorsByAgesGroupsMap[g] = {};
       this.colorsByAgesGroupsMap['80+'] = {};
     });
     this.userInfo.forEach(user => {
@@ -38,8 +44,8 @@ export class DashboardStoreService {
   }
 
   private getAgeRange(age: number): string {
-    return ageGroups.find(group => {
-      const groupPoints = group.split('-');
+    return ageGroups.find(g => {
+      const groupPoints = g.split('-');
       return age >= +groupPoints[0] && age < +groupPoints[1];
     });
   }
@@ -52,5 +58,28 @@ export class DashboardStoreService {
       });
     });
     console.log(this.hobbiesMap);
+  }
+
+  private fillEngineByGenderMap(): void {
+    genderGroups.forEach(g => {
+      this.engineByGenderMap[g] = {};
+    });
+    this.userInfo.forEach(user => {
+      if (genderGroups.some(g => g === user.gender)) {
+        const initialVal = this.engineByGenderMap[user.gender][user.motorType] || 0;
+        this.engineByGenderMap[user.gender][user.motorType] = initialVal + 1;
+      }
+    });
+    console.log(this.engineByGenderMap);
+  }
+
+  private fillVisitorsMap(): void {
+    const filledInUsers = this.userInfo.length;
+    const allUsers = this.dataInfoService.getVisitorsCounter();
+    this.visitorsMap = {
+      filled: filledInUsers,
+      'not filled': allUsers - filledInUsers
+    };
+    console.log(this.visitorsMap);
   }
 }
